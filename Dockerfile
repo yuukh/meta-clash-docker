@@ -1,8 +1,8 @@
 FROM byxiaopeng/clash:latest
-ENV VER=2021.06.19
-ENV tun=false
-ENV shell=false
-ENV clash_go=false
+# ENV VER=2021.06.19
+# ENV tun=false
+# ENV shell=false
+# ENV clash_go=false
 # RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 # RUN set -ex \
 #         && apk update && apk upgrade \
@@ -21,8 +21,8 @@ ENV clash_go=false
 # ADD /script/private.nft /etc/nftables/private.nft
 # ADD /script/nftables-tun.conf /etc/nftables.conf
 # RUN chmod +x /tmp/shell.sh
-VOLUME /root/.config/clash
-EXPOSE 53 7890 7891 7892 7893
+# VOLUME /root/.config/clash
+# EXPOSE 53 7890 7891 7892 7893
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT /entrypoint.sh
