@@ -31,10 +31,18 @@ if [ ! -e '/root/.config/clash/iptables.sh' ]; then
     cp /tmp/iptables.sh /root/.config/clash/iptables.sh
 fi
 
-echo "更新geodata文件"
-wget -O /root/.config/clash/geosite.dat https://ghproxy.com/https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
-wget -O /root/.config/clash/geoip.dat https://ghproxy.com/https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
+# echo "更新geodata文件"
+# wget -O /root/.config/clash/geosite.dat https://ghproxy.com/https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat
+# wget -O /root/.config/clash/geoip.dat https://ghproxy.com/https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat
+if [ ! -e '/root/.config/clash/geosite.dat' ]; then
+    echo "创建geosite.dat文件"
+    touch /root/.config/clash/geosite.dat
+fi
 
+if [ ! -e '/root/.config/clash/geoip.dat' ]; then
+    echo "创建geoip.dat文件"
+    touch /root/.config/clash/geoip.dat
+fi
 
 echo -e "======================== 1. 开始自义路由表 ========================\n"
 if [[ $iptables == true ]]; then
