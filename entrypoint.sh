@@ -4,9 +4,14 @@ sysctl -p
 
 echo -e "======================== 0.1 判断是否安装clash文件 ========================\n"
 if [ ! -e '/usr/bin/clash' ]; then
-    clash=$(curl -s https://api.github.com/repos/MetaCubeX/Clash.Meta/releases | jq -r .[]."name" | grep -m1 -E "([0-9]{1,2}\.?){3,4}$")
+
+    clash=$(curl -s --connect-timeout 5 https://api.github.com/repos/MetaCubeX/Clash.Meta/releases | jq -r .[]."name" | grep -m1 -E "([0-9]{1,2}\.?){3,4}$")
+    if [ -z "$clash" ]; then
+        echo 'failed to get clash version online, set clash version to v1.14.0'
+        clash="v1.14.0"
+    fi
+
     echo "当前获取clash版本为$clash"
-    clash='v1.13.1'
     if [ $(arch) == aarch64 ]; then     wget -P /usr/bin https://ghproxy.com/https://github.com/MetaCubeX/Clash.Meta/releases/download/$clash/Clash.Meta-linux-arm64-$clash.gz;     gunzip /usr/bin/Clash.Meta-linux-arm64-$clash.gz;     mv /usr/bin/Clash.Meta-linux-arm64-$clash /usr/bin/clash;     chmod +x /usr/bin/clash; fi
     # if [ $(arch) == x86_64 ]; then     wget -P /usr/bin https://mirror.ghproxy.com/https://github.com/Dreamacro/clash/releases/download/premium/clash-linux-amd64-$clash.gz;     gunzip /usr/bin/clash-linux-amd64-$clash.gz;     mv /usr/bin/clash-linux-amd64-$clash /usr/bin/clash;     chmod +x /usr/bin/clash; fi
     
