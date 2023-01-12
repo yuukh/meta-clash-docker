@@ -24,7 +24,7 @@ if [ ! -e '/root/.config/clash/dashboard/index.html' ]; then
     mkdir -p /root/.config/clash/dashboard
     curl -kfSL -o meta_yacd.zip  https://ghproxy.com/https://github.com/MetaCubeX/Yacd-meta/archive/gh-pages.zip
     unzip -o meta_yacd.zip > /dev/null
-    mv /Razord-meta-gh-page/* /root/.config/clash/dashboard
+    mv /Yacd-meta-gh-pages/* /root/.config/clash/dashboard
 #     yacd=$(curl -s --connect-timeout 5 https://api.github.com/repos/haishanh/yacd/releases | jq -r .[]."name" | grep -m1 -E "([0-9]{1,2}\.?){3,4}$")
 #     if [ -z "$yacd" ]; then
 #         echo 'failed to get yacd version'
