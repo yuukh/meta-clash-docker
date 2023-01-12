@@ -22,7 +22,12 @@ if [ ! -e '/root/.config/clash/dashboard/index.html' ]; then
     echo "开始移动面板文件到dashboard目录"
     rm -rf /root/.config/clash/dashboard
     mkdir -p /root/.config/clash/dashboard
-    wget https://ghproxy.com/https://github.com/haishanh/yacd/releases/download/v0.3.5/yacd.tar.xz
+    yacd=$(curl -s --connect-timeout 5 https://api.github.com/repos/haishanh/yacd/releases | jq -r .[]."name" | grep -m1 -E "([0-9]{1,2}\.?){3,4}$")
+    if [ -z "$yacd" ]; then
+        echo 'failed to get yacd version'
+        yacd="v0.3.8"
+    fi
+    wget https://ghproxy.com/https://github.com/haishanh/yacd/releases/download/$yacd/yacd.tar.xz
     tar -xvf yacd.tar.xz
     mv /public/* /root/.config/clash/dashboard
 fi
